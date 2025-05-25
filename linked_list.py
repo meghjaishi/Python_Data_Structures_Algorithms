@@ -4,7 +4,9 @@ class Node:
         self.value = value
         self.next = None
 
-## This class creates a data structure called Linked list leveraging the Node class
+## This class creates a data structure called Singly Linked list leveraging the Node class
+## It provides data structure operations like print_list, append, prepend, pop, pop_first, get, set_value,
+## insert, remove, and reverse with their respective time and space complexities
 class LinkedList:
     def __init__(self, value):
         new_node = Node(value)
