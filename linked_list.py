@@ -153,30 +153,30 @@ class LinkedList:
             temp = after
 
 
+if __name__ == "__main__":
 
+    # Example usage of the LinkedList class methods
+    my_linked_list = LinkedList(1)
+    my_linked_list.append(2)
+    my_linked_list.append(3)
+    my_linked_list.append(4)
 
-# Example usage of the LinkedList class methods
-my_linked_list = LinkedList(1)
-my_linked_list.append(2)
-my_linked_list.append(3)
-my_linked_list.append(4)
+    # print(my_linked_list.remove(2), '\n')
+    # my_linked_list.insert(1,1)
+    # print(my_linked_list.get(-1))
+    # my_linked_list.prepend(1)
+    # my_linked_list.set_value(1,4)
+    # print(my_linked_list.tail.value)
+    my_linked_list.print_list()
 
-# print(my_linked_list.remove(2), '\n')
-# my_linked_list.insert(1,1)
-# print(my_linked_list.get(-1))
-# my_linked_list.prepend(1)
-# my_linked_list.set_value(1,4)
-# print(my_linked_list.tail.value)
-my_linked_list.print_list()
+    my_linked_list.reverse()
+    print("Reversed:")
+    my_linked_list.print_list()
+    # (2) Items - Returns 2 Node 
+    # print(my_linked_list.pop_first())
 
-my_linked_list.reverse()
-print("Reversed:")
-my_linked_list.print_list()
-# (2) Items - Returns 2 Node 
-# print(my_linked_list.pop_first())
+    # (1) Item - Returns 1 Node
+    # print(my_linked_list.pop_first())
 
-# (1) Item - Returns 1 Node
-# print(my_linked_list.pop_first())
-
-# (0) Items - Returns None
-# print(my_linked_list.pop_first())
+    # (0) Items - Returns None
+    # print(my_linked_list.pop_first())
