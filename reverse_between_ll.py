@@ -4,7 +4,8 @@ class Node:
         self.value = value
         self.next = None
 
-    def LinkedList(self, value):
+class LinkedList:
+    def __init__(self, value):
         new_node = Node(value)
         self.head = new_node
         self.length = 1
@@ -52,20 +53,41 @@ class Node:
 
         self.head = dummy.next
 
+    def swap_pairs(self): 
+        if self.length <=  1:
+            return 
+        
+        dummy = Node(0)
+        dummy.next = self.head
+        prev = dummy
+        first = prev.next
+        
+        while (first and first.next):
+            second = first.next
+            # swap the pair
+            first.next = second.next
+            prev.next = second
+            second.next = first
+            # move to the next pair
+            prev = first 
+            first = first.next
+            
+        self.head = dummy.next
+
 if __name__ == "__main__":
-    ll = Node(0)
-    ll.LinkedList(1)
+    ll = LinkedList(1)
     ll.append(2)
     ll.append(3)
     ll.append(4)
     ll.append(5)
+    # ll.append(6)
 
     print("Original List:")
     ll.print_list()
 
-    start = 1
-    end = 4
-    ll.reverse_between(start, end)
-
-    print(f"List after reversing between positions {start} and {end}:")
+    
+    ll.swap_pairs()
+    print(f"List after swapping pairs:")
     ll.print_list()
+
+    
