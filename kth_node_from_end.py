@@ -1,5 +1,5 @@
 ## Find kth node from the end of a linked list
-from linked_list import LinkedList
+from singly_linked_list import LinkedList
 
 def find_kth_from_end(ll, k):
     if k <= 0:
