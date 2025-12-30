@@ -19,6 +19,16 @@ class Graph:
             return True
         return False
     
+    def remove_edge(self, vertex1, vertex2):
+        if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
+            try:
+                self.adjacency_list[vertex1].remove(vertex2)
+                self.adjacency_list[vertex2].remove(vertex1)
+            except ValueError:
+                pass
+            return True
+        return False
+    
 if __name__ == "__main__":
     my_graph = Graph()
     my_graph.add_vertex("A")
@@ -27,6 +37,9 @@ if __name__ == "__main__":
     my_graph.print_graph()
     print(my_graph.add_vertex("A"))  # Trying to add duplicate vertex
     my_graph.add_edge("A", "C")
+    my_graph.print_graph()
+    my_graph.add_vertex("D")
+    my_graph.remove_edge("A", "D")
     my_graph.print_graph()
 
 
