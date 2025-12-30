@@ -12,6 +12,13 @@ class Graph:
             return True
         return False
     
+    def add_edge(self, vertex1, vertex2):
+        if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
+            self.adjacency_list[vertex1].append(vertex2)
+            self.adjacency_list[vertex2].append(vertex1)
+            return True
+        return False
+    
 if __name__ == "__main__":
     my_graph = Graph()
     my_graph.add_vertex("A")
@@ -19,6 +26,8 @@ if __name__ == "__main__":
     my_graph.add_vertex("C")
     my_graph.print_graph()
     print(my_graph.add_vertex("A"))  # Trying to add duplicate vertex
+    my_graph.add_edge("A", "C")
+    my_graph.print_graph()
 
 
     
