@@ -29,17 +29,30 @@ class Graph:
             return True
         return False
     
+    def remove_vertex(self, vertex):
+        if vertex in self.adjacency_list:
+            for other_vertex in self.adjacency_list[vertex]:
+                self.adjacency_list[other_vertex].remove(vertex)
+            del self.adjacency_list[vertex]
+            return True
+        return False
+    
 if __name__ == "__main__":
     my_graph = Graph()
     my_graph.add_vertex("A")
     my_graph.add_vertex("B")
     my_graph.add_vertex("C")
+    my_graph.add_vertex("D")
     my_graph.print_graph()
     print(my_graph.add_vertex("A"))  # Trying to add duplicate vertex
     my_graph.add_edge("A", "C")
+    my_graph.add_edge("A", "B")
+    my_graph.add_edge("A", "D")
+    my_graph.add_edge("B", "D")
+    my_graph.add_edge("C", "D")
     my_graph.print_graph()
-    my_graph.add_vertex("D")
-    my_graph.remove_edge("A", "D")
+    # my_graph.remove_edge("A", "D")
+    my_graph.remove_vertex("D")
     my_graph.print_graph()
 
 
