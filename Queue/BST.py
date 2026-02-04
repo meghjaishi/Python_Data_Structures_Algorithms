@@ -97,16 +97,70 @@ class BinarySearchTree:
     def delete(self, value):
         self.__delete_node(self.root, value)
 
+    # Breadth first search method:
+    def bfs(self):
+        current_node = self.root
+        queue = []
+        results = []
+        queue.append(current_node)
+
+        while len(queue) > 0:
+            current_node = queue.pop(0)
+            results.append(current_node.value)
+            if current_node.left is not None:
+                queue.append(current_node.left)
+            if current_node.right is not None:
+                queue.append(current_node.right)
+        return results
+    
+    # depth first search methods preorder
+    def dfs_pre_order(self):
+        results = []
+        
+        def traverse(current_node):
+            results.append(current_node.value)
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+        
+        traverse(self.root)
+        return results
+    
+    def dfs_post_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+            results.append(current_node.value)
+        traverse(self.root)
+        return results
+    
+    def dfs_in_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            results.append(current_node.value)
+            if current_node.right is not None:
+                traverse(current_node.right)
+        traverse(self.root)
+        return results
+
 
 if __name__ == "__main__":
     bst = BinarySearchTree()
-    # print(bst.insert(47))  # True
-    # print(bst.insert(21))  # True
-    # print(bst.insert(76))  # True
-    # print(bst.insert(18))  # True
-    # print(bst.insert(27))  # True
-    # print(bst.insert(52))  # True
-    # print(bst.insert(82))  # True
+    print(bst.insert(47))  # True
+    print(bst.insert(21))  # True
+    print(bst.insert(76))  # True
+    print(bst.insert(18))  # True
+    print(bst.insert(27))  # True
+    print(bst.insert(52))  # True
+    print(bst.insert(82))  # True
 
     # print(bst.min_value(bst.root))  # 18
     # print(bst.min_value(bst.root.right))  # 52
@@ -121,14 +175,16 @@ if __name__ == "__main__":
 
     # print(bst.r_contains(27))
     # print(bst.r_contains(17))
-    bst.r_insert(2)
-    bst.r_insert(1)
-    bst.r_insert(3)
-    print(bst.root.value)
-    print(bst.root.left.value)
-    print(bst.root.right.value)
+    # bst.r_insert(2)
+    # bst.r_insert(1)
+    # bst.r_insert(3)
+    # print(bst.root.value)
+    # print(bst.root.left.value)
+    # print(bst.root.right.value)
 
-    bst.delete(2)
-    print(bst.root.value)
-    print(bst.root.left.value)
-    print(bst.root.right)
+    # bst.delete(2)
+    # print(bst.root.value)
+    # print(bst.root.left.value)
+    # print(bst.root.right)
+    # print(bst.bfs())
+    print(bst.dfs_in_order()) 
