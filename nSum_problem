@@ -1,0 +1,47 @@
+def nSum(nums, target, n):
+    nums.sort()
+
+    def findNsum(start, target, n):
+        res = []
+        # Optimization for early termination
+        if len(nums) - start < n or n < 2:
+            return res
+        
+        # Base case: 2-sum problem
+        if n == 2:
+            left, right = start, len(nums) - 1
+            while left < right:
+                curr_sum = nums[left] + nums[right]
+                if curr_sum == target:
+                    res.append([nums[left], nums[right]])
+                    # Skip duplicates
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+                    left += 1
+                    right -= 1
+                elif curr_sum < target:
+                    left += 1
+                else:
+                    right -= 1
+        
+        # Recursive case: reduce n-sum to (n-1)-sum
+        else:
+            for i in range(start, len(nums) - (n - 1)):
+                # Skip duplicates
+                if i > start and nums[i] == nums[i - 1]:
+                    continue
+                # Recursive call for (n-1)-sum
+                sub_res = findNsum(i + 1, target - nums[i], n - 1)
+
+                for subset in sub_res:
+                    res.append([nums[i]] + subset)
+        return res
+    return findNsum(0, target, n)
+
+if __name__ == "__main__":
+    nums = [1, 0, -1, 0, -2, 2]
+    target = 0
+    n = 4
+    print(nSum(nums, target, n))
