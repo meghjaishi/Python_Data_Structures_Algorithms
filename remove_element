@@ -1,0 +1,44 @@
+def remove_element(arr, val):
+    """
+    Removes all occurrences of val from the list arr in-place and returns the new length of the list.
+    
+    Parameters:
+    arr (list): The input list from which to remove elements.
+    val: The value to be removed from the list.
+    
+    Returns:
+    int: The new length of the list after removing the specified value.
+    """
+    i = 0
+    while i < len(arr):
+        if arr[i] == val:
+            arr.pop(i)
+        else:
+            i += 1
+    return len(arr)
+
+def remove_element_two_pointer(arr, val): # This method is more efficient than the previous one as it avoids the overhead of popping elements from the list, which can be costly in terms of time complexity.
+    """
+    Removes all occurrences of val from the list arr in-place using the two-pointer technique and returns the new length of the list.
+    
+    Parameters:
+    arr (list): The input list from which to remove elements.
+    val: The value to be removed from the list.
+    
+    Returns:
+    int: The new length of the list after removing the specified value.
+    """
+    k = 0
+    for i in range(len(arr)):
+        if arr[i] != val:
+            arr[k] = arr[i]
+            k += 1
+    return k
+
+
+if __name__ == "__main__":
+    # Example usage
+    my_list = [3, 2, 2, 3, 4, 5]
+    value_to_remove = 2
+    new_length = remove_element_two_pointer(my_list, value_to_remove)
+    print(f"New length of the list: {new_length}")
