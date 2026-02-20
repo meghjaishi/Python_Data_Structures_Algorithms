@@ -1,4 +1,3 @@
-
 def two_sum_hash(nums: List[int], target: int) -> List[int]:
     num_dict = {}
     for i, num in enumerate(nums):
@@ -16,6 +15,7 @@ def two_sum_brute_force(self, nums: List[int], target: int) -> List[int]:
     return []
 
 def two_sum_two_pointer(self, nums: List[int], target: int) -> List[int]:
+    # Note: This method assumes that the input array is already sorted.
     left = 0
     right = len(nums) - 1
 
