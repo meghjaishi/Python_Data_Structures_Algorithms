@@ -151,15 +151,130 @@ class LinkedList:
             temp.next = before
             before = temp
             temp = after
+    
+    def bubble_sort(self):
+        if self.length < 2:
+            return    
+        for _ in range(self.length):
+            current = self.head
+            while current.next is not None:
+                if current.value > current.next.value:
+                    current.value, current.next.value = current.next.value, current.value
+                current = current.next
+
+    def selection_sort(self):
+        if self.length < 2:
+            return 
+        
+        current = self.head
+        while current is not None:
+            min = current
+            inner = current.next
+            while inner is not None:
+                if inner.value < min.value:
+                    min = inner
+                inner = inner.next
+            
+            if min != current:
+                current.value, min.value = min.value, current.value
+            current = current.next
+
+    def selection_sort_node(self):
+        if self.length < 2:
+            return
+        
+        dummy = Node(0)
+        dummy.next = self.head
+
+        prev_current = dummy
+        while prev_current.next is not None:
+            current = prev_current.next
+            min_node = current
+            prev_min = prev_current
+
+            search_prev = current
+            while search_prev.next is not None:
+                if search_prev.next.value < min_node.value:
+                    min_node = search_prev.next
+                    prev_min = search_prev
+                search_prev = search_prev.next
+            
+            if min_node != current:
+                if current.next == min_node:
+                    current.next = min_node.next
+                    min_node.next = current
+                    prev_current.next = min_node
+                else:
+                    temp_next = current.next
+                    current.next = min_node.next
+                    min_node.next = temp_next
+                    prev_current.next = min_node
+                    prev_min.next = current
+
+                current = min_node
+            
+            prev_current = current
+        self.head = dummy.next
+
+    def insertion_sort(self):
+        if self.length < 2:
+            return
+        
+        sorted_list_head = self.head
+        unsorted_list_head = self.head.next
+        sorted_list_head.next = None # This breaks the head and creates new linked list
+
+        while unsorted_list_head is not None:
+            current = unsorted_list_head
+            unsorted_list_head = unsorted_list_head.next
+            if current.value < sorted_list_head.value:
+                current.next = sorted_list_head
+                sorted_list_head = current
+            else:
+                search_pointer = sorted_list_head
+                while search_pointer.next is not None and search_pointer.next.value < current.value:
+                    search_pointer = search_pointer.next
+                
+                current.next = search_pointer.next
+                search_pointer.next = current
+                
+        self.head = sorted_list_head
+        temp = self.head
+        while temp.next is not None:
+            temp = temp.next
+        self.tail = temp
+
+    def merge(self, other_list):
+        dummy = Node(0)
+        current = dummy
+
+        other_head = other_list.head
+        while self.head is not None and other_head is not None:
+            if self.head.value < other_head.value:
+                current.next = self.head
+                self.head = self.head.next
+            else:
+                current.next = other_head
+                other_head = other_head.next
+            current = current.next
+        if self.head is not None:
+            current.next = self.head
+        else:
+            current.next = other_head
+            self.tail = other_list.tail
+        self.head = dummy.next
+        self.length += other_list.length
+
 
 
 if __name__ == "__main__":
 
     # Example usage of the LinkedList class methods
-    my_linked_list = LinkedList(1)
-    my_linked_list.append(2)
-    my_linked_list.append(3)
-    my_linked_list.append(4)
+    # my_linked_list = LinkedList(4)
+    # my_linked_list.append(5)
+    # my_linked_list.append(3)
+    # my_linked_list.append(1)
+    # my_linked_list.append(2)
 
     # print(my_linked_list.remove(2), '\n')
     # my_linked_list.insert(1,1)
@@ -167,11 +282,11 @@ if __name__ == "__main__":
     # my_linked_list.prepend(1)
     # my_linked_list.set_value(1,4)
     # print(my_linked_list.tail.value)
-    my_linked_list.print_list()
+    # my_linked_list.print_list()
 
-    my_linked_list.reverse()
-    print("Reversed:")
-    my_linked_list.print_list()
+    # my_linked_list.bubble_sort()
+    # print("Sorted:")
+    # my_linked_list.print_list()
     # (2) Items - Returns 2 Node 
     # print(my_linked_list.pop_first())
 
@@ -180,3 +295,18 @@ if __name__ == "__main__":
 
     # (0) Items - Returns None
     # print(my_linked_list.pop_first())
+
+    l1 = LinkedList(1)
+    l1.append(3)
+    l1.append(5)
+    l1.append(7)
+
+
+    l2 = LinkedList(2)
+    l2.append(4)
+    l2.append(6)
+    l2.append(8)
+
+    l1.merge(l2)
+
+    l1.print_list()
