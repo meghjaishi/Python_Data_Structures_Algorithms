@@ -1,0 +1,17 @@
+def rotate(arr, k):
+    """
+    Rotates the list arr to the right by k steps in-place.
+    """
+    n = len(arr)
+    k = k % n  # Handle cases where k is greater than n
+    arr[:] = arr[-k:] + arr[:-k]  # Rotate the array by slicing and concatenating
+
+
+
+if __name__ == "__main__":
+    # Example usage
+    my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    k = 2
+    print(f"Original list: {my_list}")
+    rotate(my_list, k)
+    print(f"Rotated list by {k} steps: {my_list}")
