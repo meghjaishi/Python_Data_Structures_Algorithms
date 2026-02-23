@@ -1,0 +1,23 @@
+def remove_duplicates(arr):
+    """
+    Removes duplicates from a sorted list arr in-place and returns the new length of the list.
+    """
+    if not arr:
+        return 0
+    
+    write_index = 1  # Index to write the next unique element
+    
+    for read_index in range(1, len(arr)):
+        if arr[read_index] != arr[read_index - 1]:  # Check if current element is different from the previous one
+            arr[write_index] = arr[read_index]  # Write the unique element at the write_index
+            write_index += 1  # Move the write_index to the next position
+    
+    return write_index  # The new length of the list with unique elements
+
+if __name__ == "__main__":
+    # Example usage
+    my_list = [1, 1, 2, 3, 3, 4, 5]
+    print(f"Original list: {my_list}")
+    new_length = remove_duplicates(my_list)
+    print(f"New length of the list: {new_length}")
+    print(f"Modified list with unique elements: {my_list[:new_length]}")
